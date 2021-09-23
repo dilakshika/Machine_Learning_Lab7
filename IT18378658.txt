@@ -1,0 +1,114 @@
+IT18378658
+Perera A.P.A.D.
+Machine Learning - IT4060
+=============================================================================================================================================================
+_____________________________________________________________________________________________________________________________________________________________
+
+[1] Random Forest Classifier
+
+1.classification_reports
+
+classification report is a text report showing the main classification metrics.
+
+Parameters: 	y_true : 1d array-like, or label indicator array / sparse matrix
+		Ground truth (correct) target values.
+
+		y_pred : 1d array-like, or label indicator array / sparse matrix
+		Estimated targets as returned by a classifier.
+
+		labels : array-like of shape (n_labels,), default=None
+		Optional list of label indices to include in the report.
+
+		target_names : list of str of shape (n_labels,), default=None
+		Optional display names matching the labels (same order).
+
+		sample_weight : array-like of shape (n_samples,), default=None
+		Sample weights.
+
+		digits : int, default=2
+		Number of digits for formatting output floating point values. When output_dict is True, this will be ignored and the returned values
+		will not be rounded.
+
+		output_dict : bool, default=False
+		If True, return output as dict.
+		New in version 0.20.
+
+		zero_division : “warn”, 0 or 1, default=”warn”
+		Sets the value to return when there is a zero division. If set to “warn”, this acts as 0, but warnings are also raised.
+
+Returns : 	reportstring / dict
+		Text summary of the precision, recall, F1 score for each class. Dictionary returned if output_dict is True.
+		
+		The reported averages include macro average (averaging the unweighted mean per label), weighted average (averaging the support-weighted
+		mean per label), and sample average (only for multilabel classification). Micro average (averaging the total true positives, false
+		negatives and false positives) is only shown for multi-label or multi-class with a subset of classes, because it corresponds to accuracy
+		otherwise and would be the same for all metrics.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+print(metrics.classification_report(ypred, ytest))
+
+ 	       precision    recall  f1-score   support
+
+           0       1.00      0.97      0.99        38
+           1       0.98      0.98      0.98        43
+           2       0.95      1.00      0.98        42
+           3       0.98      0.96      0.97        46
+           4       0.97      1.00      0.99        37
+           5       0.98      0.96      0.97        49
+           6       1.00      1.00      1.00        52
+           7       1.00      0.96      0.98        50
+           8       0.94      0.98      0.96        46
+           9       0.98      0.98      0.98        47
+
+    accuracy                           0.98       450
+   macro avg       0.98      0.98      0.98       450
+weighted avg       0.98      0.98      0.98       450
+
+Note: according to lab 7 exercise this function use to calculate precision, recall, f1-score, and accuracy. support is each category example so 
+zeros in the testing data set there were 38 data observation where labels as 0. 43 observations labeled as 1. when the true labels are 0 it has
+completely correctly classified them as 0. so, all the true labels in 0 is actually, predicted as 0. but consider 1 when the true label is 1 only 
+42 of the predicted values correctly predicted as 1. but there is only one observation when the true label is 1 it is identified as 5. so likewise, 
+when the true label is 2 it has correctly classified 42 times but one time it is identify the label as 3 and one time it is identified as 0. 
+______________________________________________________________________________________________________________________________________________________________
+
+2. confusion matrix
+
+Compute confusion matrix to evaluate the accuracy of a classification by computing the confusion matrix with each row corresponding to the true class.
+
+Note: according lab7 exercise confusing matrix is basically use for double check what are the actual class labels of the testing data set and what was 
+the predicted labels of the testing data set, then we are going to create a matrix it shows what are the correctly classified observations and how much
+as mis classified.  In X axis have true labels and Y axis have predicted values.
+
+
+
+Parameters :	y_true : array-like of shape (n_samples,)
+		Ground truth (correct) target values.
+
+		y_pred : array-like of shape (n_samples,)
+		Estimated targets as returned by a classifier.
+
+		labels : array-like of shape (n_classes), default=None
+		List of labels to index the matrix. This may be used to reorder or select a subset of labels. If None is given, those that appear at least
+		once in y_true or y_pred are used in sorted order.
+
+		sample_weight : array-like of shape (n_samples,), default=None
+		Sample weights.
+
+		normalize : {‘true’, ‘pred’, ‘all’}, default=None
+		Normalizes confusion matrix over the true (rows), predicted (columns) conditions or all the population. If None, confusion matrix will not
+		be normalized.
+
+Returns :	Cndarray of shape (n_classes, n_classes)
+		Confusion matrix whose i-th row and j-th column entry indicates the number of samples with true label being i-th class and predicted label
+		being j-th class.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+>>> from sklearn.metrics import confusion_matrix
+>>> y_true = [2, 0, 2, 2, 0, 1]
+>>> y_pred = [0, 0, 2, 2, 0, 2]
+>>> confusion_matrix(y_true, y_pred)
+array([[2, 0, 0],
+       [0, 0, 1],
+       [1, 0, 2]])
+_________________________________________________________________________________________________________________________________________________________________
